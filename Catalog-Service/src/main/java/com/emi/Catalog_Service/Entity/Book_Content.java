@@ -1,10 +1,15 @@
 package com.emi.Catalog_Service.Entity;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.UUID;
+
+import com.emi.Catalog_Service.enums.BookChapter_Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,4 +46,17 @@ public class Book_Content {
 	
 	@Column(name="free_preview", nullable=false)
 	private Boolean freePreview;	
+	
+	@Column(name="created_at", nullable=false, updatable=false)
+	private Instant createdAt;
+	
+	@Column(name="updated_at", nullable=false)
+	private Instant updatedAt;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="status", nullable=false)
+	private BookChapter_Status status;
+	
+	@Column(name="free_access", nullable=false)
+	private Boolean freeAccess;
 }
