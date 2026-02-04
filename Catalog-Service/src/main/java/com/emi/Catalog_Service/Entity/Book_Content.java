@@ -29,7 +29,7 @@ public class Book_Content {
 	private UUID id;
 	
 	@Column(name="book_id", nullable=false)
-	private UUID book_id;
+	private UUID bookId;
 	
 	@Column(name="title", nullable=false)
 	private String title;

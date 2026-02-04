@@ -1,5 +1,80 @@
 package com.emi.Catalog_Service.mapper;
 
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
+import com.emi.Catalog_Service.Entity.Book;
+import com.emi.Catalog_Service.RequestDtos.RequestBookCreationDto;
+import com.emi.Catalog_Service.RequestDtos.RequsestBookUpdateDto;
+import com.emi.Catalog_Service.ResponseDtos.ResponseBookDto;
+import com.emi.Catalog_Service.ResponseDtos.ResponseFullBookDto;
+import com.emi.Catalog_Service.enums.BookStatus;
+
+@Component
 public class BookMapper {
+
+	public Book toEntity(RequestBookCreationDto requestDto) {
+		Book book = new Book();
+		book.setTitle(requestDto.title());
+		book.setDescription(requestDto.description());
+		book.setISBN(requestDto.ISBN());
+		book.setPrice(requestDto.price());
+		book.setCreatedAt(Instant.now());
+		book.setUpdatedAt(Instant.now());
+		book.setStatus(BookStatus.PUBLIC);
+		book.setTotalChapters(0);
+		book.setDeleted(false);
+		book.setFreePreview(requestDto.freePreviewAvailable());
+		return book;
+	}
+
+	public ResponseBookDto toDto(Book savedBook) {
+		return new ResponseBookDto(
+				savedBook.getId(),
+				savedBook.getTitle(),
+				savedBook.getTotalChapters(),
+				"Book Saved in Author's publsh section Successfully (Catalog service)"
+				);
+			
+	}
+	
+	public ResponseFullBookDto toFullBookDto(Book book, List<UUID> chapterIds) {
+		return new ResponseFullBookDto(
+				
+				book.getTitle(),
+				book.getDescription(),
+				book.getISBN(),
+				book.getPrice(),
+				book.getAuthorSnapshots().stream().map(author -> author.getId()).toList(),
+				book.getGenreIds().stream().map(genre -> genre.getId()).toList(),
+				book.getStatus().name(),
+				book.getTotalChapters(),
+				chapterIds,
+				book.getFreePreview()
+				);
+	}
+	
+	public Book updateBookEntity(RequsestBookUpdateDto request, Book book) {
+		book.setTitle(request.title());
+		book.setPrice(request.price());
+		book.setDescription(request.description());
+		book.setFreePreview(request.freePreviewAvailable());
+		book.setUpdatedAt(Instant.now());
+		return book;
+	}
+	
+	public ResponseBookDto returnUpdatedBook(RequsestBookUpdateDto request, Integer totalChapters) {
+		return new ResponseBookDto(
+				request.bookId(),
+				request.title(),
+				totalChapters,
+				"Book Saved in Author's publsh section Successfully (Catalog service)"				
+				);
+	}
+	
+	
 
 }
