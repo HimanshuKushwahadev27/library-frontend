@@ -41,7 +41,7 @@ public class BookContentController {
 		return ResponseEntity.ok(bookContentService.createMultipleBookContents(request));
 	}
 	
-	@GetMapping(value="/{contentId}")
+	@GetMapping(value="/contentId/{contentId}")
 	public ResponseEntity<ResponseContentDto> getBookContentByContentId(
 			@PathVariable UUID contentId){
 		return ResponseEntity.ok(bookContentService.getBookContentByContentId(contentId));
@@ -53,13 +53,13 @@ public class BookContentController {
 		return ResponseEntity.ok(bookContentService.getBookContentsByContentIds(contentIds));
 	}
 	
-	@GetMapping(value="/{bookId}")
+	@GetMapping(value="/bookId/{bookId}")
 	public ResponseEntity<List<ResponseContentDto>> getBookContentByBookId(
 			@PathVariable UUID bookId){
 		return ResponseEntity.ok(bookContentService.getBookContentByBookId(bookId));
 	}
 	
-	@DeleteMapping(value="/{contentId}")
+	@DeleteMapping(value="/contentId/{contentId}")
 	public ResponseEntity<String> deleteBookContentByContentId(
 			@PathVariable UUID contentId){
 		return ResponseEntity.ok(bookContentService.deleteBookContentByContentId(contentId));
@@ -71,7 +71,7 @@ public class BookContentController {
 		return ResponseEntity.ok(bookContentService.deleteBookContentsByContentIds(contentIds));
 	}
 	
-	@DeleteMapping(value="/{bookId}")
+	@DeleteMapping(value="/bookId/{bookId}")
 	public ResponseEntity<String> deleteBookContentByBookId(
 			@PathVariable UUID bookId){
 		return ResponseEntity.ok(bookContentService.deleteBookContentByBookId(bookId));

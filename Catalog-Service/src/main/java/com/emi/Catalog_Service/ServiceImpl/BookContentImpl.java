@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.emi.Catalog_Service.Entity.Book;
 import com.emi.Catalog_Service.Entity.Book_Content;
@@ -30,6 +31,7 @@ public class BookContentImpl implements BookContentService {
 	private final BookContentRepo contentRepo;
 	private final BookRepository bookRepo;
 	
+	@Transactional
 	@Override
 	public ResponseContentDto createBookContent(RequestCreateContentDto createContentDto) {
 		
@@ -90,6 +92,7 @@ public class BookContentImpl implements BookContentService {
 		return contentMapper.toDto(content);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<ResponseContentDto> getBookContentsByContentIds(List<UUID> contentIds) {
 		List<ResponseContentDto> contents = contentIds.stream()
@@ -98,6 +101,7 @@ public class BookContentImpl implements BookContentService {
 		return contents;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<ResponseContentDto> getBookContentByBookId(UUID bookId) {
 		
@@ -137,6 +141,7 @@ public class BookContentImpl implements BookContentService {
 		return "Contents deleted successfully for provided ids.";
 	}
 
+	@Transactional
 	@Override
 	public String deleteBookContentByBookId(UUID bookId) {
 		List<Book_Content> contents = contentRepo.findByBookIdAndIsDeletedFalse(bookId);

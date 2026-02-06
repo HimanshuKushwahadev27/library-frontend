@@ -30,13 +30,13 @@ public class GenreController {
 		return ResponseEntity.ok(GenreService.createGenre(request));
 	}
 	
-	@GetMapping(value="/{genreId}")
+	@GetMapping(value="genreId/{genreId}")
 	public ResponseEntity<ResponseGenreDto> getGenreById(
 			@PathVariable UUID genreId){
 		return ResponseEntity.ok(GenreService.getGenreById(genreId));
 	}
 	
-	@GetMapping(value="/{name}")
+	@GetMapping(value="name/{name}")
 	public ResponseEntity<ResponseGenreDto> getGenreByName(
 			@PathVariable String name){
 		return ResponseEntity.ok(GenreService.getGenreByName(name));
