@@ -37,7 +37,7 @@ public class AuthorDraftBook {
 	private String description;
 	
 	@Column(name="ISBN", nullable=false, unique=true)
-	private String ISBN;
+	private String isbn;
 	
 	@Column(name="price", nullable=false)
 	private BigDecimal price;
@@ -54,4 +54,7 @@ public class AuthorDraftBook {
 	
 	@Column(name="free_preview", nullable=false)
 	private Boolean freePreview;
+
+	@Column(name="is_deleted", nullable=false)
+	private boolean isDeleted;
 }

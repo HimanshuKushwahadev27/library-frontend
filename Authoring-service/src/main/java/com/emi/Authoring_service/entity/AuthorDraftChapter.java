@@ -54,4 +54,6 @@ public class AuthorDraftChapter {
 	@Column(name="status", nullable=false)
 	private ChapterStatus status;
 	
+	@Column(name="is_deleted", nullable=false)
+	private boolean isDeleted;
 }
